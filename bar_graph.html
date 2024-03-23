@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bar Graph</title>
+  <!-- Include necessary libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <canvas id="barChart"></canvas>
+  </div>
+
+  <!-- Your Vue.js script goes here -->
+  <script>
+    new Vue({
+      el: '#app',
+      mounted() {
+        const barChartData = [
+          {"month": "2023-08", "numInstalls": 29},
+          {"month": "2023-09", "numInstalls": 16},
+          {"month": "2023-10", "numInstalls": 17},
+          {"month": "2023-11", "numInstalls": 10},
+          {"month": "2023-12", "numInstalls": 12},
+          {"month": "2024-01", "numInstalls": 8},
+          {"month": "2024-02", "numInstalls": 4},
+          {"month": "2024-03", "numInstalls": 1}
+        ];
+
+        const labels = barChartData.map(data => data.month);
+        const data = barChartData.map(data => data.numInstalls);
+
+        new Chart(document.getElementById('barChart'), {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Number of Installs',
+              backgroundColor: '#36a2eb',
+              data: data
+            }]
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

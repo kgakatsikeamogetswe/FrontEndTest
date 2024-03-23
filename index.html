@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pie Chart</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f4f4; 
+    }
+    .chart-container {
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      background-color: #fff; 
+      border-radius: 8px; 
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+      padding: 20px; 
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="chart-container">
+    <canvas id="pieChart"></canvas>
+  </div>
+
+ 
+  <script>
+    new Vue({
+      el: '#app',
+      mounted() {
+        const pieChartData = [
+          {"year": "2020", "numInstalls": 1},
+          {"year": "2021", "numInstalls": 12},
+          {"year": "2022", "numInstalls": 77},
+          {"year": "2023", "numInstalls": 226},
+          {"year": "2024", "numInstalls": 13}
+        ];
+
+        const labels = pieChartData.map(data => data.year);
+        const data = pieChartData.map(data => data.numInstalls);
+
+        new Chart(document.getElementById('pieChart'), {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Number of Installs',
+              backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#cc65fe', '#fd6b19'],
+              data: data
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false, 
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: {
+                fontSize: 14,
+                fontColor: '#333'
+              }
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
